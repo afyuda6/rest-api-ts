@@ -1,0 +1,17 @@
+{
+  "name": "rest-api-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/sqlite3": "^3.1.11",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
