@@ -11,8 +11,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     const parsedUrl = parse(req.url || '', true);
     const path = parsedUrl.pathname;
 
-    const userRoute = /^\/users(?:\/([a-zA-Z0-9_-]+))?$/;
-    if (path && path.match(userRoute)) {
+    if (path === '/users/' || path === '/users') {
         userHandler(req, res);
     } else {
         notFound(res);

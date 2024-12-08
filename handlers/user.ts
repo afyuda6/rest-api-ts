@@ -21,7 +21,7 @@ export const userHandler = (req: IncomingMessage, res: ServerResponse): void => 
 const handleReadUsers = (req: IncomingMessage, res: ServerResponse): void => {
     db.all('SELECT * FROM users', [], (err, users) => {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ status: 'OK', code: 200, users }));
+        res.end(JSON.stringify({ status: 'OK', code: 200, data: users }));
     });
 };
 
@@ -36,7 +36,8 @@ const handleCreateUser = (req: IncomingMessage, res: ServerResponse): void => {
         const parsedBody = new URLSearchParams(body);
         const name = parsedBody.get('name');
 
-        if (!name) {
+        // @ts-ignore
+        if (name.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'name' parameter" }));
             return;
@@ -61,7 +62,8 @@ const handleUpdateUser = (req: IncomingMessage, res: ServerResponse): void => {
         const name = parsedBody.get('name');
         const id = parsedBody.get('id');
 
-        if (!name || !id) {
+        // @ts-ignore
+        if (name.trim() === '' || id.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'id' or 'name' parameter" }));
             return;
@@ -85,7 +87,8 @@ const handleDeleteUser = (req: IncomingMessage, res: ServerResponse): void => {
         const parsedBody = new URLSearchParams(body);
         const id = parsedBody.get('id');
 
-        if (!id) {
+        // @ts-ignore
+        if (id.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'id' parameter" }));
             return;
