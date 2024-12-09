@@ -36,8 +36,7 @@ const handleCreateUser = (req: IncomingMessage, res: ServerResponse): void => {
         const parsedBody = new URLSearchParams(body);
         const name = parsedBody.get('name');
 
-        // @ts-ignore
-        if (name.trim() === '') {
+        if (name == null || name.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'name' parameter" }));
             return;
@@ -62,7 +61,12 @@ const handleUpdateUser = (req: IncomingMessage, res: ServerResponse): void => {
         const name = parsedBody.get('name');
         const id = parsedBody.get('id');
 
-        // @ts-ignore
+        if (name == null || id == null) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'id' or 'name' parameter" }));
+            return;
+        }
+
         if (name.trim() === '' || id.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'id' or 'name' parameter" }));
@@ -87,8 +91,7 @@ const handleDeleteUser = (req: IncomingMessage, res: ServerResponse): void => {
         const parsedBody = new URLSearchParams(body);
         const id = parsedBody.get('id');
 
-        // @ts-ignore
-        if (id.trim() === '') {
+        if (id == null || id.trim() === '') {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'Bad Request', code: 400, errors: "Missing 'id' parameter" }));
             return;
