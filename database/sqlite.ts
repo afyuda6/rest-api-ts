@@ -18,7 +18,6 @@ const db = new sqlite3.Database(
 const initializeDatabase = (): void => {
     db.run(`DROP TABLE IF EXISTS users`, (err: Error | null) => {
     });
-
     db.run(`CREATE TABLE IF NOT EXISTS users
             (
                 id INTEGER PRIMARY KEY,
