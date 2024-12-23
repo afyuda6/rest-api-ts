@@ -8,5 +8,5 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     userHandler(path, req, res);
 });
 
-const PORT = 6014;
+const PORT = process.env.PORT || 6014;
 server.listen(PORT, () => {});
