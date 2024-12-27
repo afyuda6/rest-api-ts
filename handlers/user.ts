@@ -75,6 +75,14 @@ const handleDeleteUser = (req: IncomingMessage, res: ServerResponse): void => {
 };
 
 export const userHandler = (path: string | null, req: IncomingMessage, res: ServerResponse): void => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
     if (path === '/users/' || path === '/users') {
         const method = req.method;
         if (method === 'GET') {
